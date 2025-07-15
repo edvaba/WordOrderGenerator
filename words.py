@@ -21,12 +21,6 @@ adverbpath = 'adverb.txt'
 nounpath = 'nouns.txt'
 adjectivepath = 'adjectives.txt'
 
-# Lists to store words from each file
-verblist = []
-nounlist = []
-adverblist = []
-adjectivelist = []
-
 # Function to read words from a file and store them in a list
 def load_words(file_path):
     words = []
@@ -38,16 +32,19 @@ def load_words(file_path):
         print(f"File not found: {file_path}")
     return words
 
-# Call the load_words function to load words from file path into respective lists
+# Lists to store words from each file. Call the load_words function to load words from file path into the respective lists
 verblist = load_words(verbpath)
 nounlist = load_words(nounpath)
 adverblist = load_words(adverbpath)
 adjectivelist = load_words(adjectivepath)
 
-# 100 seentence generation function: draw a random choice for a word from each list
+# 100 sentence generation function: draw a random choice for a word from each list of adjectives, adverbs, nouns and verbs, and write to output.txt file in the current directory. Change 'w' to 'a' if you want to keep adding to the file.
 def gen_sen():
-    for i in range(0, 100):
-        print(f'{random.choice(verblist)} {random.choice(adverblist)}, {random.choice(verblist)} {random.choice(adjectivelist)} {random.choice(adverblist)} {random.choice(verblist)} a {random.choice(nounlist)}')
+    with open("output.txt", 'w', encoding='UTF-8') as file:
+        for i in range(0, 100):
+            print(f'{random.choice(verblist)} {random.choice(adverblist)}, {random.choice(verblist)} {random.choice(adjectivelist)} {random.choice(adverblist)} {random.choice(verblist)} {random.choice(nounlist)}')
+            file.write(f'{random.choice(verblist)} {random.choice(adverblist)}, {random.choice(verblist)} {random.choice(adjectivelist)} {random.choice(adverblist)} {random.choice(verblist)} {random.choice(nounlist)}\n')
+    file.close()
 
 # display how many words are available in each list
 def checkStats():
